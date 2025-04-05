@@ -9,7 +9,7 @@ import base64
 
 
 # Secure JWT configuration
-JWT_SECRET = "3838484ghghdjdj22939AHS28290AJ28"  # Change this to a strong secret key
+JWT_SECRET = "xxxxxxxxxxxxxxxxxxxxxx"  # Change this to a strong secret key
 JWT_ALGORITHM = "HS256"
 
 # Generate a secret key (store it securely!)
@@ -29,8 +29,8 @@ oauth = OAuth(app)
 
 oauth.register(
   name='oidc',
-  client_id='574p03o0dl5jqm011a2dkhvck8',
-  client_secret='lv06766aidj350cmjb4l3kuqkh230fgtvjjlrcuo0mori29bh4a',
+  client_id='xxxxxxxxxxxxxxxxxxx',
+  client_secret='xxxxxxxxxxxxxxxxxxxxxx',
   server_metadata_url='https://cognito-idp.us-east-1.amazonaws.com/us-east-1_abvYIcCgM/.well-known/openid-configuration',
   client_kwargs={'scope': 'phone openid email'}
 )
