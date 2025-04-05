@@ -42,9 +42,13 @@ This project is a cloud-based file storage system, similar to Dropbox or Google 
    * Create an app client:
      - In the "App Clients" section, create a new app client
      - Ensure the "Enable sign-in API" option is checked.
-   * Update the COGNITO_CLIENT_SECRET:
+   * Update the `COGNITO_CLIENT_SECRET`:
      - After creating the app client, note the client ID and client secret for your Cognito app.
      - replace them in the code
+4. Set up environment variables: <br>
+   It is a safe security measure to not hardcode secret codes, better to store them in environment variables.
+   - Create a `.env` file in the root directory or set the variables directly in your environment. These variables are used in the app via Python's `os` library
+   
 
 
    
