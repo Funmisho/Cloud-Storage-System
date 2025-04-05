@@ -46,9 +46,17 @@ This project is a cloud-based file storage system, similar to Dropbox or Google 
      - After creating the app client, note the client ID and client secret for your Cognito app.
      - replace them in the code
 4. Set up environment variables: <br>
-   It is a safe security measure to not hardcode secret codes, better to store them in environment variables.
-   - Create a `.env` file in the root directory or set the variables directly in your environment. These variables are used in the app via Python's `os` library
-   
+   Safe security measure to not hardcode secret codes, better to store them in environment variables. Create a `.env` file in the root directory or set the variables directly in your environment. These variables are used in the app via Python's `os` library
+   - Set `COGNITO_CLIENT_SECRET` and `JWT_SECRET` in your `.env` file or environment.
+   - Set up an AWS S3 bucket (replace `YOUR_BUCKET_NAME` in the app):
+     ```bash
+     export BUCKET_NAME="YOUR_BUCKET_NAME"
+     ```
+5. Run the Flask application locally:
+   ```bash
+   python3 app.py
+   ```
+   The application will be running at http://localhost:5000.
 
 
    
