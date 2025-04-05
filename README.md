@@ -36,13 +36,15 @@ This project is a cloud-based file storage system, similar to Dropbox or Google 
    pip install -r requirements.txt
    ```
 3. Set up AWS Cognito:
-   * Set up AWS Cognito:
+   * Create a new user pool::
      - Go to the AWS Cognito Console and create a new user pool.
      - Configure user pool settings (make sure to enable email-based login or other methods depending on your use case).
    * Create an app client:
      - In the "App Clients" section, create a new app client
      - Ensure the "Enable sign-in API" option is checked.
-   * 
+   * Update the COGNITO_CLIENT_SECRET:
+     - After creating the app client, note the client ID and client secret for your Cognito app.
+     - replace them in the code
 
 
    
