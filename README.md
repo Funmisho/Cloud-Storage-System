@@ -4,7 +4,7 @@
 This project is a cloud-based file storage system, similar to Dropbox or Google Drive, where users can upload, download and manage files stored in AWS S3. The system incorporates user authentication via AWS Cognito to ensure secure access to the files.
 
 ## Features
-- **File Upload and Download**: Users can securely upload and download files securely with encryption.
+- **File Upload and Download**: Users can securely upload and download files with encryption.
 - **Authentication with AWS Cognito**: Users authenticate through AWS Cognito using OAuth2.0 to ensure secure access to the system.
 - **Secure Storage using AWS S3**: Files are securely stored in AWS S3 with encryption for additional protection.
 - **File Management**: Ability to list, rename and delete stored files.
@@ -21,7 +21,7 @@ This project takes several steps to ensure data security, privacy, and controlle
   - Will enforce **strong password policies** at the Cognito user pool level.
 
 - **Secure Data Transmission**:
-  - Enabled **client-side encryption** before files are uploaded to S3 to ensure data confidentiality—Amazon cannot read user data.
+  - Client-side encryption ensures files are encrypted before reaching AWS S3, making the data unreadable to AWS itself.
   - HTTPS will be used for all communication once the application is fully deployed.
 
 - **Secure API Endpoints**:
@@ -30,9 +30,8 @@ This project takes several steps to ensure data security, privacy, and controlle
 
 
 ## Tech Stack
-- **Flask**: A lightweight Python web framework to build the application.
-- **Cloud Provider**: AWS(S3, Cognito, IAM, Elastic Beanstalk)
-- **Backend**: Python(Flask API) + Boto3(AWS SDK)
+- **Cloud Services**: AWS (S3, Cognito, IAM, Elastic Beanstalk)
+- **Backend**: Python (Flask API) + Boto3 (AWS SDK)
 - **Frontend**: HTML/CSS/Javascript
 - **Deployment**: AWS Elastic Beanstalk
 
