@@ -58,6 +58,17 @@ This project is a cloud-based file storage system, similar to Dropbox or Google 
    ```
    The application will be running at http://localhost:5000.
 
+##  Deployment
+
+### Attempt with AWS Elastic Beanstalk:
+
+   - **Elastic Beanstalk Setup**: Initially, I tried deploying the application to Elastic Beanstalk (EBS), but encountered issues with the redirect URI for Cognito requiring HTTPS, which EBS couldn’t easily support.
+     * **What Worked**: The backend worked fine once deployed but failed to meet the redirect URL requirement for authentication.
+     * **Challenges**: The key issue was that EBS requires an HTTPS URL for Cognito’s login redirect, while the default EBS URL uses HTTP. Configuring a custom domain or switching to a different service like API Gateway would be required to fix this.
+       
+     
+   
+
 
    
   
