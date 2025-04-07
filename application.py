@@ -32,8 +32,8 @@ app.secret_key = os.urandom(24)  # Secret key for managing sessions
 oauth = OAuth(app)
 oauth.register(
   name='oidc',
-  client_id='xxxxxxxxxxxxxxxxxxx',
-  client_secret='xxxxxxxxxxxxxxxxxxxxxx',
+  client_id='xxxxxxxxxxxxxxxxxxx',    # Your Cognito app client ID
+  client_secret='xxxxxxxxxxxxxxxxxxxxxx',   # Your Cognito app client secret
   server_metadata_url='https://cognito-idp.us-east-1.amazonaws.com/us-east-1_abvYIcCgM/.well-known/openid-configuration',
   client_kwargs={'scope': 'phone openid email'}
 )
@@ -45,31 +45,33 @@ BUCKET_NAME = "cloud-file-storage-242"
 # Adding a home page with links to login and logout routes.
 @app.route('/')
 def home():
+    """Render the home page."""
     return render_template('index.html')
 
 @app.route('/auth-status')
 def auth_status():
+    """Return authentication status of the user."""
     user_email = get_current_user()
     return jsonify({"loggedIn": bool(user_email), "user": user_email})
 
-
-
-# Configuring a login route to direct to Amazon Cognito managed login for authentication 
-# with a redirect to an authorize route.        
-
 @app.route('/login')
 def login():
+    """Redirect user to Cognito hosted login UI."""
     redirect_uri = url_for('authorize', _external=True)
     return oauth.oidc.authorize_redirect(redirect_uri)
 
-
-# The OAuth module collects the access token and retrieves user data from the Amazon Cognito
-# userInfo endpoint. Configure an authorize route to handle the access token and user data 
-# after authentication.
-
+"""
+The OAuth module collects the access token and retrieves user data from the Amazon Cognito
+userInfo endpoint. Configure an authorize route to handle the access token and user data 
+after authentication.
+"""
 
 @app.route('/authorize')
 def authorize():
+    """
+    Callback route after Cognito login.
+    Handles token retrieval and session storage.
+    """
     try:
         token = oauth.oidc.authorize_access_token()
         user = token.get('userinfo', {})
