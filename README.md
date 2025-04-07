@@ -9,7 +9,25 @@ This project is a cloud-based file storage system, similar to Dropbox or Google 
 - **Secure Storage using AWS S3**: Files are securely stored in AWS S3 with encryption for additional protection.
 - **File Management**: Ability to list, rename and delete stored files.
 - **Web Interface**: A simple UI for users to interact with the system.
-- **Scalability and Security**: Best practices for cloud security and IAM implemented. 
+- **Scalability and Security**: Best practices for cloud security and IAM implemented.
+
+## Optimizing Security
+This project takes several steps to ensure data security, privacy, and controlled access:
+
+- **Authentication & Authorization**:
+  - Integrated **AWS Cognito** for user identity management.
+  - Enforced **JWT validation** to ensure only authenticated users can access protected routes.
+  - Plan to implement **Multi-Factor Authentication (MFA)** for extra account security.
+  - Will enforce **strong password policies** at the Cognito user pool level.
+
+- **Secure Data Transmission**:
+  - Enabled **client-side encryption** before files are uploaded to S3 to ensure data confidentiality—Amazon cannot read user data.
+  - HTTPS will be used for all communication once the application is fully deployed.
+
+- **Secure API Endpoints**:
+  - Endpoints are protected by validating **JWTs issued by Cognito**.
+  - Unauthorized or unauthenticated requests are rejected.
+
 
 ## Tech Stack
 - **Flask**: A lightweight Python web framework to build the application.
@@ -36,10 +54,10 @@ This project is a cloud-based file storage system, similar to Dropbox or Google 
    pip install -r requirements.txt
    ```
 3. Set up AWS Cognito:
-   * Create a new user pool::
+   * Create a new `user pool`:
      - Go to the AWS Cognito Console and create a new user pool.
      - Configure user pool settings (make sure to enable email-based login or other methods depending on your use case).
-   * Create an app client:
+   * Create an `app client`:
      - In the "App Clients" section, create a new app client
      - Ensure the "Enable sign-in API" option is checked.
    * Update the `COGNITO_CLIENT_SECRET`:
@@ -65,6 +83,14 @@ This project is a cloud-based file storage system, similar to Dropbox or Google 
    - **Elastic Beanstalk Setup**: Initially, I tried deploying the application to Elastic Beanstalk (EBS), but encountered issues with the redirect URI for Cognito requiring HTTPS, which EBS couldn’t easily support.
      * **What Worked**: The backend worked fine once deployed but failed to meet the redirect URL requirement for authentication.
      * **Challenges**: The key issue was that EBS requires an HTTPS URL for Cognito’s login redirect, while the default EBS URL uses HTTP. Configuring a custom domain or switching to a different service like API Gateway would be required to fix this.
+    
+## 🧠 Challenges & Learnings
+- **Improved Python Skills**: Building this application helped improve core Python programming skills, especially around environment management, working with libraries like `boto3`, and handling authentication logic.
+- **Frontend Implementation**: Writing the HTML, CSS, and JavaScript for the frontend was challenging, as it’s not my primary area of strength. I relied on various documentation, Stack Overflow, and AI tools to understand and implement the UI.
+- **Security Awareness**: Gained deeper understanding of secure authentication, JWT handling, IAM roles, and client-side encryption to protect user data.
+- **AWS Services**: Navigating AWS Cognito, S3, and deployment options like Elastic Beanstalk was a big learning curve but helped solidify my cloud skills.
+
+    
        
      
    
