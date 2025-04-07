@@ -83,13 +83,18 @@ def authorize():
             "exp": datetime.utcnow() + timedelta(hours=2)  # Token expires in 2 hours
         }
         jwt_token = jwt.encode(jwt_payload, JWT_SECRET, algorithm=JWT_ALGORITHM)
-
+        
+        # Store token in session
         session['jwt_token'] = jwt_token  # Store JWT in session
         return redirect(url_for('home'))
     except Exception as e:
         return f"OAuth Error: {str(e)}", 400
 
 def get_current_user():
+    """
+    Decode JWT from session to get current user email.
+    Return None if token is invalid or expired.
+    """
     token = session.get("jwt_token")
     if not token:
         return None
@@ -102,16 +107,20 @@ def get_current_user():
         session.pop("jwt_token", None)  # Remove expired/invalid token
         return None
 
-
-
-# Using GET for logout to keep it simple
 @app.route('/logout')
 def logout():
-    session.pop('jwt_token', None)  # Remove JWT token
+    """Logout user by clearing session token."""
+    session.pop('jwt_token', None)
     return redirect(url_for('login'))
 
 @app.route('/upload', methods=['POST'])
 def upload_file():
+    """
+    Handle secure file upload:
+    - Check authentication
+    - Encrypt file content
+    - Upload encrypted file to S3
+    """
     user_email = get_current_user()
     if not user_email:
         return jsonify({"error": "Unauthorized. Please log in."}), 401
@@ -135,6 +144,12 @@ def upload_file():
 
 @app.route('/download', methods=['GET'])
 def download_file():
+    """
+    Handle secure file download:
+    - Check authentication
+    - Download encrypted file from S3
+    - Decrypt before returning
+    """
     user_email = get_current_user()
     if not user_email:
         return jsonify({"error": "Unauthorized. Please log in."}), 401
@@ -155,6 +170,9 @@ def download_file():
 
 @app.route('/delete', methods=['DELETE'])
 def delete_file():
+    """
+    Delete a user file from S3.
+    """
     user_email = get_current_user()
     if not user_email:
         return jsonify({"error": "Unauthorized. Please log in."}), 401
@@ -172,6 +190,9 @@ def delete_file():
 
 @app.route('/files', methods=['GET'])
 def list_files():
+    """
+    List all files uploaded by the current user.
+    """
     user_email = get_current_user()
     if not user_email:
         return jsonify({"error": "Unauthorized. Please log in."}), 401
