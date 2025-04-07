@@ -1,32 +1,35 @@
+# Import necessary libraries
 from flask import Flask, render_template, redirect, url_for, session, request, jsonify
 from authlib.integrations.flask_client import OAuth
 import os
 import boto3
-import jwt  # Import JWT library
+import jwt  # Import JWT library # JWT for token encoding/decoding
 from datetime import datetime, timedelta
-from cryptography.fernet import Fernet
+from cryptography.fernet import Fernet # For symmetric file encryption
 import base64
 
 
 # Secure JWT configuration
-JWT_SECRET = "xxxxxxxxxxxxxxxxxxxxxx"  # Change this to a strong secret key
+JWT_SECRET = "xxxxxxxxxxxxxxxxxxxxxx"  # Replace with your secure JWT secret
 JWT_ALGORITHM = "HS256"
 
 # Generate a secret key (store it securely!)
 key = Fernet.generate_key()
 cipher = Fernet(key)
 
+# Encrypt file data before upload
 def encrypt_file(file_data):
     return cipher.encrypt(file_data)
 
+# Decrypt file data after download
 def decrypt_file(encrypted_data):
     return cipher.decrypt(encrypted_data)
 
 app = Flask(__name__)
-app.secret_key = os.urandom(24)  # Secure key for session management
+app.secret_key = os.urandom(24)  # Secret key for managing sessions
 
+# OAuth configuration using Authlib
 oauth = OAuth(app)
-
 oauth.register(
   name='oidc',
   client_id='xxxxxxxxxxxxxxxxxxx',
