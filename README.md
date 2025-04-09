@@ -1,4 +1,6 @@
 # Cloud-Based File Storage System
+![image](https://github.com/user-attachments/assets/fcce20bb-2ef7-4ea2-b549-b4e9cbd7789d)
+
 
 ## Project Overview
 This project is a cloud-based file storage system, similar to Dropbox or Google Drive, where users can upload, download and manage files stored in AWS S3. The system incorporates user authentication via AWS Cognito to ensure secure access to the files.
@@ -88,6 +90,9 @@ This project takes several steps to ensure data security, privacy, and controlle
 - **Frontend Implementation**: Writing the HTML, CSS, and JavaScript for the frontend was challenging, as it’s not my primary area of strength. I relied on various documentation, Stack Overflow, and AI tools to understand and implement the UI.
 - **Security Awareness**: Gained deeper understanding of secure authentication, JWT handling, IAM roles, and client-side encryption to protect user data.
 - **AWS Services**: Navigating AWS Cognito, S3, and deployment options like Elastic Beanstalk was a big learning curve but helped solidify my cloud skills.
+
+  ![image](https://github.com/user-attachments/assets/54fb5ee9-4ec7-45a1-ada9-e1c708529302)
+
 
     
        
